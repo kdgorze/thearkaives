@@ -26,14 +26,18 @@
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { font-size: 16px; scroll-behavior: smooth; }
+html, body {
+  height: 100%;
+}
 
 body {
   font-family: var(--font-body);
   background: var(--canvas);
   color: var(--ink);
-  min-height: 100dvh;
+
   overflow-x: hidden;
+  overflow-y: auto;   
+  -webkit-overflow-scrolling: touch;
 }
 
 img { display: block; max-width: 100%; }
@@ -79,29 +83,35 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
    PAGE SYSTEM
    ============================================================ */
 .page {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+
+  min-height: 100dvh;
+  width: 100%;
+
+  display: none;
+  flex-direction: column;
+
   padding: clamp(1.5rem, 5vw, 3rem);
+  padding-bottom: 6rem;
+
   opacity: 0;
-  pointer-events: none;
-  transform: translateY(18px);
+  transform: translateY(12px);
   transition: opacity var(--transition), transform var(--transition);
-  overflow-y: auto;
+
+  z-index: 10;
 }
 
 .page.active {
+  display: flex;
   opacity: 1;
-  pointer-events: all;
   transform: translateY(0);
+  pointer-events: all;
 }
 
 .page-inner {
   width: 100%;
   max-width: 860px;
+  margin: 0 auto;
   padding-top: 2rem;
 }
 
@@ -478,6 +488,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   outline: none;
   appearance: none;
   -webkit-appearance: none;
+}
+
+input,
+textarea,
+select {
+  font-size: 16px;
 }
 
 .form-group select {

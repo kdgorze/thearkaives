@@ -14,9 +14,9 @@ function showPage(id) {
   pages.forEach(p => {
     p.classList.toggle('active', p.id === id);
   });
-  // scroll the incoming page back to top
-  const target = document.getElementById(id);
-  if (target) target.scrollTop = 0;
+
+  // smooth scroll to top of document instead
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Nav cards (home → other pages)
@@ -47,14 +47,14 @@ function openLightbox(src, caption) {
   lightboxImg.alt = caption;
   lightboxCap.textContent = caption;
   lightbox.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.classList.add('no-scroll');
   lightboxClose.focus();
 }
 
 function closeLightbox() {
   lightbox.classList.remove('open');
   lightboxImg.src = '';
-  document.body.style.overflow = '';
+  document.body.classList.remove('no-scroll');
 }
 
 document.querySelectorAll('.gallery-item').forEach(item => {
